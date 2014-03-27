@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: GCal Days
- * Version:     1.0
+ * Version:     1.1
  * Plugin URI:  http://coffee2code.com/wp-plugins/gcal-days/
  * Author:      Scott Reilly
  * Author URI:  http://coffee2code.com/
@@ -17,7 +17,7 @@
  *
  * @package GCal_Days
  * @author  Scott Reilly
- * @version 1.0
+ * @version 1.1
  */
 
 /*
@@ -59,7 +59,7 @@ class c2c_GCalDays {
 	 * @since 1.0
 	 */
 	public static function version() {
-		return '1.0';
+		return '1.1';
 	}
 
 	/**
@@ -68,7 +68,8 @@ class c2c_GCalDays {
 	 * @since 1.0
 	 */
 	public static function init() {
-		add_action( 'init', array( __CLASS__, 'do_init' ) );
+		add_action( 'init',        array( __CLASS__, 'do_init' ) );
+		add_filter( 'widget_text', array( __CLASS__, 'enable_shortcodes_in_widget_text' ), 1 );
 	}
 
 	/**
@@ -91,6 +92,24 @@ class c2c_GCalDays {
 		if ( ! class_exists( 'c2c_GCalDaysGoogle' ) ) {
 			require_once( dirname( __FILE__ ) . '/gcal-days.google.php' );
 		}
+	}
+
+	/**
+	 * Enables shortcodes in widget text if not already enabled.
+	 *
+	 * @since 1.1
+	 *
+	 * @param  string $text The widget text
+	 * @return string The widget text (unmodified)
+	 */
+	public static function enable_shortcodes_in_widget_text( $text ) {
+		// Only enable shortcodes for widget_text if not already enabled
+		if ( false === has_filter( 'widget_text', 'do_shortcode' ) ) {
+			add_filter( 'widget_text', 'shortcode_unautop' );
+			add_filter( 'widget_text', 'do_shortcode' );
+		}
+
+		return $text;
 	}
 
 	/**

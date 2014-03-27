@@ -6,13 +6,27 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 3.6
 Tested up to: 3.8.1
-Stable tag: 1.0
+Stable tag: 1.1
 
 Shortcode and functions to query your Google Calendar for the number of days since or until the most recent event matching your search criteria.
 
 == Description ==
 
 This plugin provides a shortcode and a set of functions to return the number of days since the most recent past event in your Google Calendar matching specified search terms. The shortcode can also be used to return the number of days until the closest upcoming event matching specified search terms.
+
+= The Shortcode =
+
+`[gcal-days search="" type="" id=""]`
+
+The shortcode name is `gcal-days`. It has three attributes, but only one of which is absolutely necessary:
+
+* `search`: (Required.) The search term.
+* `type`: (Optional.) The direction in time to search. Defaults to "since", which searches past events. "until" will search future events.
+* `id`: (Conditionally optional.) The ID of the calendar to search. You can discover the IDs of calendars via the plugin's settings page. This shortcode attribute can only be optionally omitted from shortcodes if you define a default calendar in the plugin's settings.
+
+The shortcode outputs a number representing the number of days until a matching event. If no event is found, a -1 will be displayed.
+
+Examples: `[gcal-days search="dentist"]`, `[gcal-days type="until" search="vacation" id="test_lkjsadf987asdf24@group.calendar.google.com"]`
 
 Links: [Plugin Homepage](http://coffee2code.com/wp-plugins/gcal-days/) | [Plugin Directory Page](http://wordpress.org/plugins/gcal-days/) | [Author Homepage](http://coffee2code.com)
 
@@ -34,6 +48,10 @@ No. Google's API allows for an app (such as this plugin) to be granted specific 
 = What sort of access from Google is the plugin requesting? =
 
 The plugin is only requesting read-only access to Google Calendars. As such, the plugin will not be able to make any changes to your calendars, nor will it be able to access data associated with other Google services.
+
+= Why isn't a calendar change I just made in Google Calendar being recognized by the plugin? =
+
+To avoid the expense of making network connections to Google for every page load, information is cached for a short period of time. You may have to wait a few minutes after calendar changes before expecting to see those changes reflected in the plugin.
 
 
 == Functions ==
@@ -75,13 +93,28 @@ if ( -1 == $days_since ) {
 ?>`
 
 
+== Screenshots ==
+
+1. A screenshot of the plugin's admin settings page.
+
+
 == Changelog ==
+
+= 1.1 =
+* Apply do_shortcode to widget_text so the shortcode works in text widgets
+* Add actual documentation for the shortcode
+* Add screenshot
+* Add banner
+* Add another FAQ item
 
 = 1.0 =
 * Initial release
 
 
 == Upgrade Notice ==
+
+= 1.1 =
+Recommended minor update: allow shortcode to work in text widgets; added documentation for shortcode.
 
 = 1.0 =
 Initial release!
