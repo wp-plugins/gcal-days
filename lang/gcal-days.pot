@@ -1,0 +1,189 @@
+# Translation of the WordPress plugin GCal Days v1.1.1 by Scott Reilly.
+# Copyright (C) 2015 Scott Reilly
+# This file is distributed under the same license as the GCal Days plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: GCal Days 1.1.1\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/gcal-days\n"
+"POT-Creation-Date: 2015-03-07 05:41:29+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: gcal-days.google.php:151
+msgid "No Google API authorization code provided."
+msgstr ""
+
+#: gcal-days.google.php:310
+msgid "ERROR: %s"
+msgstr ""
+
+#: gcal-days.google.php:318
+msgid "API ERROR: [%s] - %s (%s)"
+msgstr ""
+
+#: gcal-days.google.php:320
+msgid "API ERROR: %s"
+msgstr ""
+
+#: gcal-days.php:140
+msgid "(no search defined)"
+msgstr ""
+
+#: gcal-days.settings.php:79
+msgid "Settings"
+msgstr ""
+
+#. #-#-#-#-#  gcal-days.pot (GCal Days 1.1.1)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: gcal-days.settings.php:102
+msgid "GCal Days"
+msgstr ""
+
+#: gcal-days.settings.php:105
+msgid ""
+"A plugin to provide a shortcode and functions to query your Google Calendar "
+"for the number of days since or until the most recent event matching your "
+"search criteria."
+msgstr ""
+
+#: gcal-days.settings.php:126
+msgid "Tokens"
+msgstr ""
+
+#: gcal-days.settings.php:127
+msgid "Access token: %s"
+msgstr ""
+
+#: gcal-days.settings.php:128
+msgid "Refresh token: %s"
+msgstr ""
+
+#: gcal-days.settings.php:143
+msgid "Google API authorization code"
+msgstr ""
+
+#: gcal-days.settings.php:149
+msgid "Default calendar ID"
+msgstr ""
+
+#: gcal-days.settings.php:155
+msgid "Note to self"
+msgstr ""
+
+#: gcal-days.settings.php:190
+msgid "The settings have been reset."
+msgstr ""
+
+#: gcal-days.settings.php:195
+msgid ""
+"Please obtain an authentication code from Google via the link under the "
+"input field."
+msgstr ""
+
+#: gcal-days.settings.php:223
+msgid ""
+"Test: There have been %s days since the most recent past event in your "
+"calendar matching \"%s\"."
+msgstr ""
+
+#: gcal-days.settings.php:226
+msgid ""
+"Test: There are %s days until the closest upcoming event in your calendar "
+"matching \"%s\"."
+msgstr ""
+
+#: gcal-days.settings.php:303
+msgid ""
+"In order for this plugin to access information from Google Calendar, you "
+"must first grant it permission from Google. Click the following link to do "
+"so; the plugin is requesting read-only access to your Google Calendar data:"
+msgstr ""
+
+#: gcal-days.settings.php:304
+msgid "Authorize with Google"
+msgstr ""
+
+#: gcal-days.settings.php:308
+msgid ""
+"Optionally supply the ID of a calendar to be used as the default for "
+"shortcodes and functions that don't explicity specify a calendar."
+msgstr ""
+
+#: gcal-days.settings.php:311
+msgid ""
+"This is simply a note to yourself and is not used by the plugin. It is "
+"recommended that you use it to record which GMail account you have "
+"authorized this plugin to have access to."
+msgstr ""
+
+#: gcal-days.settings.php:336
+msgid ""
+"It looks like there is a problem with the Google API authorization code. "
+"Please re-request a new authorization from Google using the link under the "
+"input field above."
+msgstr ""
+
+#: gcal-days.settings.php:341
+msgid ""
+"Note the ID values as that will be what you need to supply as the \"id\" "
+"attribute for the shortcode or the $calendar_id argument for functions "
+"(unless you assign one as the default above)."
+msgstr ""
+
+#: gcal-days.settings.php:343
+msgid "ID"
+msgstr ""
+
+#: gcal-days.settings.php:343
+msgid "Description"
+msgstr ""
+
+#: gcal-days.settings.php:368
+msgid "Optionally use the following form fields to test the API."
+msgstr ""
+
+#: gcal-days.settings.php:371
+msgid "Type"
+msgstr ""
+
+#: gcal-days.settings.php:373
+msgid "since"
+msgstr ""
+
+#: gcal-days.settings.php:374
+msgid "until"
+msgstr ""
+
+#: gcal-days.settings.php:379
+msgid "Search"
+msgstr ""
+
+#: gcal-days.settings.php:384
+msgid "Calendar ID"
+msgstr ""
+
+#: gcal-days.settings.php:386
+msgid "Leave blank to use the default calendar defined above."
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://coffee2code.com/wp-plugins/gcal-days/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Shortcode and functions to query your Google Calendar for the number of days "
+"since or until the most recent event matching your search criteria."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Scott Reilly"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://coffee2code.com/"
+msgstr ""
