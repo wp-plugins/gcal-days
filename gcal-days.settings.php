@@ -76,7 +76,7 @@ class c2c_GCalDaysSettings {
 	 * @return array Links associated with a plugin on the admin Plugins page
 	 */
 	public static function plugin_action_links( $action_links ) {
-		$settings_link = '<a href="' . self::settings_page_url() . '">' . __( 'Settings' ) . '</a>';
+		$settings_link = '<a href="' . self::settings_page_url() . '">' . __( 'Settings', 'gcal-days' ) . '</a>';
 		array_unshift( $action_links, $settings_link );
 		return $action_links;
 	}
@@ -99,10 +99,10 @@ class c2c_GCalDaysSettings {
 	 */
 	public static function settings_page() {
 		echo "<div class='wrap'>\n";
-		echo '<h2>' . __( 'GCal Days' ) . '</h2>';
+		echo '<h2>' . __( 'GCal Days', 'gcal-days' ) . '</h2>';
 
 		echo '<p>';
-		_e( 'A plugin to provide a shortcode and functions to query your Google Calendar for the number of days since or until the most recent event matching your search criteria.' );
+		_e( 'A plugin to provide a shortcode and functions to query your Google Calendar for the number of days since or until the most recent event matching your search criteria.', 'gcal-days' );
 		echo '</p>';
 
 		echo "<form action='" . admin_url( 'options.php' ) . "' method='post' class='c2c-form'>\n";
@@ -123,9 +123,9 @@ class c2c_GCalDaysSettings {
 		if ( isset( $_GET['show_tokens'] ) && '1' == $_GET['show_tokens'] ) {
 			echo '<div class="wrap">';
 			echo '<hr />';
-			echo '<h3>' . __( 'Tokens' ) . '</h3>';
-			echo '<p>' . sprintf( __( 'Access token: %s' ), c2c_GCalDaysGoogle::get_access_token() ) . '</p>';
-			echo '<p>' . sprintf( __( 'Refresh token: %s' ), c2c_GCalDaysGoogle::get_refresh_token() ) . '</p>';
+			echo '<h3>' . __( 'Tokens', 'gcal-days' ) . '</h3>';
+			echo '<p>' . sprintf( __( 'Access token: %s', 'gcal-days' ), c2c_GCalDaysGoogle::get_access_token() ) . '</p>';
+			echo '<p>' . sprintf( __( 'Refresh token: %s', 'gcal-days' ), c2c_GCalDaysGoogle::get_refresh_token() ) . '</p>';
 			echo '</div>';
 		}
 
@@ -140,19 +140,19 @@ class c2c_GCalDaysSettings {
 	public static function register_settings() {
 		register_setting( self::$admin_options_name, self::$admin_options_name, array( __CLASS__, 'validate_options' ) );
 		add_settings_section( 'default', '', '__return_false', self::$plugin_file );
-		add_settings_field( 'code', __( 'Google API authorization code' ),
+		add_settings_field( 'code', __( 'Google API authorization code', 'gcal-days' ),
 			array( __CLASS__, 'display_option' ),
 			self::$plugin_file,
 			'default',
 			array( 'label_for' => 'code' )
 		);
-		add_settings_field( 'default_calendar_id', __( 'Default calendar ID' ),
+		add_settings_field( 'default_calendar_id', __( 'Default calendar ID', 'gcal-days' ),
 			array( __CLASS__, 'display_option' ),
 			self::$plugin_file,
 			'default',
 			array( 'label_for' => 'default_calendar_id' )
 		);
-		add_settings_field( 'note', __( 'Note to self' ),
+		add_settings_field( 'note', __( 'Note to self', 'gcal-days' ),
 			array( __CLASS__, 'display_option' ),
 			self::$plugin_file,
 			'default',
@@ -187,12 +187,12 @@ class c2c_GCalDaysSettings {
 
 		if ( isset( $_POST['Reset'] ) ) {
 			$options = self::reset_options();
-			add_settings_error( 'general', 'settings_reset', __( 'The settings have been reset.' ), 'updated' );
+			add_settings_error( 'general', 'settings_reset', __( 'The settings have been reset.', 'gcal-days' ), 'updated' );
 			return $options;
 		}
 
 		if ( ( ! isset( $new_options['code'] ) || empty( $new_options['code'] ) ) ) {
-			add_settings_error( 'code', 'gcal-days-no-code', __( 'Please obtain an authentication code from Google via the link under the input field.' ), 'error' );
+			add_settings_error( 'code', 'gcal-days-no-code', __( 'Please obtain an authentication code from Google via the link under the input field.', 'gcal-days' ), 'error' );
 			$options['code'] = '';
 		} else {
 			$options['code'] = sanitize_text_field( $new_options['code'] );
@@ -220,10 +220,10 @@ class c2c_GCalDaysSettings {
 
 			if ( 'since' == $type ) {
 				$days = c2c_GCalDaysGoogle::days_since( $new_options['test_search'], $calendar_id );
-				$msg  = __( 'Test: There have been %s days since the most recent past event in your calendar matching "%s".' );
+				$msg  = __( 'Test: There have been %s days since the most recent past event in your calendar matching "%s".', 'gcal-days' );
 			} else {
 				$days = c2c_GCalDaysGoogle::days_until( $new_options['test_search'], $calendar_id );
-				$msg  = __( 'Test: There are %s days until the closest upcoming event in your calendar matching "%s".' );
+				$msg  = __( 'Test: There are %s days until the closest upcoming event in your calendar matching "%s".', 'gcal-days' );
 			}
 
 			add_settings_error( 'general', 'settings_test_api', sprintf( $msg, $days, sanitize_text_field( $new_options['test_search'] ) ), 'updated' );
@@ -300,16 +300,15 @@ class c2c_GCalDaysSettings {
 			echo '<input type="text" name="' . self::$admin_options_name . '[code]" id="c2c_gds_code" value="' . esc_attr( $val ) . '" size="70" />';
 			echo '<p class="description">';
 // TODO: Maybe change message to reflect that the auth needs to be done, or that it was already successfully done
-			_e( 'In order for this plugin to access information from Google Calendar, you must first grant it permission from Google. Click the following
-				link to do so; the plugin is requesting read-only access to your Google Calendar data:' );
-			echo ' ' . sprintf( '<a href="%s" target="_blank">Authorize with Google</a>.', c2c_GCalDaysGoogle::get_oauth_url() );
+			_e( 'In order for this plugin to access information from Google Calendar, you must first grant it permission from Google. Click the following link to do so; the plugin is requesting read-only access to your Google Calendar data:', 'gcal-days' );
+			echo ' ' . sprintf( '<a href="%s" target="_blank">' . __( 'Authorize with Google', 'gcal-days' ) . '</a>.', c2c_GCalDaysGoogle::get_oauth_url() );
 			echo '</p>';
 		} elseif ( 'default_calendar_id' == $field ) {
 			echo '<input type="text" name="' . self::$admin_options_name . '[default_calendar_id]" id="c2c_gds_default_calendar_id" value="' . esc_attr( $val ) . '" size="70" />';
-			echo '<p class="description">' . __( "Optionally supply the ID of a calendar to be used as the default for shortcodes and functions that don't explicity specify a calendar." ) . '</p>';
+			echo '<p class="description">' . __( "Optionally supply the ID of a calendar to be used as the default for shortcodes and functions that don't explicity specify a calendar.", 'gcal-days' ) . '</p>';
 		} elseif ( 'note' == $field ) {
 			echo '<input type="text" name="' . self::$admin_options_name . '[note]" id="c2c_gds_note" value="' . esc_attr( $val ) . '" size="70" />';
-			echo '<p class="description">' . __( 'This is simply a note to yourself and is not used by the plugin. It is recommended that you use it to record which GMail account you have authorized this plugin to have access to.' ) . '</p>';
+			echo '<p class="description">' . __( 'This is simply a note to yourself and is not used by the plugin. It is recommended that you use it to record which GMail account you have authorized this plugin to have access to.', 'gcal-days' ) . '</p>';
 		}
 	}
 
@@ -334,14 +333,14 @@ class c2c_GCalDaysSettings {
 			echo '<p>' . $calendars . '</p>';
 			if ( false !== strpos( $calendars, 'Invalid Credentials' ) ) {
 				echo '<p><strong>' .
-				__( 'It looks like there is a problem with the Google API authorization code. Please re-request a new authorization from Google using the link under the input field above.' ) .
+				__( 'It looks like there is a problem with the Google API authorization code. Please re-request a new authorization from Google using the link under the input field above.', 'gcal-days' ) .
 				'</strong></p>';
 			}
 		} else {
 			echo '<p>';
-			_e( 'Note the ID values as that will be what you need to supply as the "id" attribute for the shortcode or the $calendar_id argument for functions (unless you assign one as the default above).' );
+			_e( 'Note the ID values as that will be what you need to supply as the "id" attribute for the shortcode or the $calendar_id argument for functions (unless you assign one as the default above).', 'gcal-days' );
 			echo '</p>';
-			echo '<table><tr><th>' . __( 'ID' ) . '</th><th>' . __( 'Description' ) . '</th></tr>';
+			echo '<table><tr><th>' . __( 'ID', 'gcal-days' ) . '</th><th>' . __( 'Description', 'gcal-days' ) . '</th></tr>';
 			foreach ( $calendars as $cal ) {
 				echo '<tr><td>' . sanitize_text_field( $cal->id ) . '</td><td>' . sanitize_text_field( $cal->summary ) . '</td></tr>';
 			}
@@ -366,25 +365,25 @@ class c2c_GCalDaysSettings {
 
 		echo '<table class="form-table">';
 		echo '<h3>Test the API</h3>';
-		echo '<p>' . __( 'Optionally use the following form fields to test the API.' ) . '</p>';
+		echo '<p>' . __( 'Optionally use the following form fields to test the API.', 'gcal-days' ) . '</p>';
 
 		echo '<tr valign="top">';
-		echo '<th scope="row"><label for="' . self::$admin_options_name . '[test_type]">' . __( 'Type' ) . '</label></th>';
+		echo '<th scope="row"><label for="' . self::$admin_options_name . '[test_type]">' . __( 'Type', 'gcal-days' ) . '</label></th>';
 		echo '<td><select name="' . self::$admin_options_name . '[test_type]" id="c2c_gds_test_type">';
-		echo '<option value="since" selected="selected">' . __( 'since' ) . '</option>';
-		echo '<option value="until">' . __( 'until' ) . '</option>';
+		echo '<option value="since" selected="selected">' . __( 'since', 'gcal-days' ) . '</option>';
+		echo '<option value="until">' . __( 'until', 'gcal-days' ) . '</option>';
 		echo '</select></td>';
 		echo '</tr>';
 
 		echo '<tr valign="top">';
-		echo '<th scope="row"><label for="' . self::$admin_options_name . '[test_search]">' . __( 'Search' ) . '</label></th>';
+		echo '<th scope="row"><label for="' . self::$admin_options_name . '[test_search]">' . __( 'Search', 'gcal-days' ) . '</label></th>';
 		echo '<td><input type="text" name="' . self::$admin_options_name . '[test_search]" id="c2c_gds_test_search" value="" size="70" /></td>';
 		echo '</tr>';
 
 		echo '<tr valign="top">';
-		echo '<th scope="row"><label for="' . self::$admin_options_name . '[test_calendar_id]">' . __( 'Calendar ID' ) . '</label></th>';
+		echo '<th scope="row"><label for="' . self::$admin_options_name . '[test_calendar_id]">' . __( 'Calendar ID', 'gcal-days' ) . '</label></th>';
 		echo '<td><input type="text" name="' . self::$admin_options_name . '[test_calendar_id]" id="c2c_gds_test_calendar_id" value="" size="70" />';
-		echo '<p class="description">' . __( 'Leave blank to use the default calendar defined above.' ) . '</p></td>';
+		echo '<p class="description">' . __( 'Leave blank to use the default calendar defined above.', 'gcal-days' ) . '</p></td>';
 		echo '</tr>';
 
 		echo '</table>';

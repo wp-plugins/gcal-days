@@ -1,34 +1,36 @@
 <?php
 /**
  * Plugin Name: GCal Days
- * Version:     1.1
+ * Version:     1.1.1
  * Plugin URI:  http://coffee2code.com/wp-plugins/gcal-days/
  * Author:      Scott Reilly
  * Author URI:  http://coffee2code.com/
+ * Text Domain: gcal-days
+ * Domain Path: /lang/
  * License:     GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  * Description: Shortcode and functions to query your Google Calendar for the number of days since or until the most recent event matching your search criteria.
  *
- * Compatible with WordPress 3.6 through 3.8+.
+ * Compatible with WordPress 3.6 through 4.1+.
  *
  * =>> Read the accompanying readme.txt file for instructions and documentation.
  * =>> Also, visit the plugin's homepage for additional information and updates.
- * =>> Or visit: http://wordpress.org/plugins/gcal-days/
+ * =>> Or visit: https://wordpress.org/plugins/gcal-days/
  *
  * @package GCal_Days
  * @author  Scott Reilly
- * @version 1.1
+ * @version 1.1.1
  */
 
 /*
-TODO:
-	* Support for multiple GCal accounts?
-	* Merge calendar listing and default calendar id setting, making a radiobutton list of calendars to choose as the default
-	* Improve error handling
-*/
+ * TODO:
+ * - Support for multiple GCal accounts?
+ * - Merge calendar listing and default calendar id setting, making a radiobutton list of calendars to choose as the default
+ * - Improve error handling
+ */
 
 /*
-	Copyright (c) 2014 by Scott Reilly (aka coffee2code)
+	Copyright (c) 2014-2015 by Scott Reilly (aka coffee2code)
 
 	This program is free software; you can redistribute it and/or
 	modify it under the terms of the GNU General Public License
@@ -59,7 +61,7 @@ class c2c_GCalDays {
 	 * @since 1.0
 	 */
 	public static function version() {
-		return '1.1';
+		return '1.1.1';
 	}
 
 	/**
@@ -121,7 +123,7 @@ class c2c_GCalDays {
 	 * @param  string $content The content between opening and closing shortcode tags.
 	 * @return string
 	 */
-	public function shortcode( $atts, $content = null ) {
+	public static function shortcode( $atts, $content = null ) {
 		self::load_google_api();
 
 		$defaults = array(

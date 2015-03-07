@@ -148,7 +148,7 @@ class c2c_GCalDaysGoogle {
 		if ( empty( $refresh_token ) ) {
 			$code = self::get_code();
 			if ( empty( $code ) ) {
-				return __( 'No Google API authorization code provided.' );
+				return __( 'No Google API authorization code provided.', 'gcal-days' );
 			} else {
 				return self::get_tokens();
 			}
@@ -307,7 +307,7 @@ class c2c_GCalDaysGoogle {
 
 		if ( $show_error ) {
 			if ( is_wp_error( $response ) ) {
-				$msg = sprintf( 'ERROR: %s', $response->get_error_message() );
+				$msg = sprintf( __( 'ERROR: %s', 'gcal-days' ), $response->get_error_message() );
 			} else {
 				$body = json_decode( $response['body'] );
 				$error = $body->error;
@@ -315,9 +315,9 @@ class c2c_GCalDaysGoogle {
 					$error = $error->message;
 				}
 				if ( 200 != $response['response']['code'] ) {
-					$msg = sprintf( 'API ERROR: [%s] - %s (%s)', $response['response']['code'], $response['response']['message'], $error );
+					$msg = sprintf( __( 'API ERROR: [%s] - %s (%s)', 'gcal-days' ), $response['response']['code'], $response['response']['message'], $error );
 				} else {
-					$msg = sprintf( 'API ERROR: %s', $error );
+					$msg = sprintf( __( 'API ERROR: %s', 'gcal-days' ), $error );
 				}
 			}
 			return $msg;

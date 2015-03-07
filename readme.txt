@@ -5,8 +5,8 @@ Tags: calendar, google, gcal, shortcode, days since, days until, coffee2code
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 3.6
-Tested up to: 3.8.1
-Stable tag: 1.1
+Tested up to: 4.1
+Stable tag: 1.1.1
 
 Shortcode and functions to query your Google Calendar for the number of days since or until the most recent event matching your search criteria.
 
@@ -28,15 +28,15 @@ The shortcode outputs a number representing the number of days until a matching 
 
 Examples: `[gcal-days search="dentist"]`, `[gcal-days type="until" search="vacation" id="test_lkjsadf987asdf24@group.calendar.google.com"]`
 
-Links: [Plugin Homepage](http://coffee2code.com/wp-plugins/gcal-days/) | [Plugin Directory Page](http://wordpress.org/plugins/gcal-days/) | [Author Homepage](http://coffee2code.com)
+Links: [Plugin Homepage](http://coffee2code.com/wp-plugins/gcal-days/) | [Plugin Directory Page](https://wordpress.org/plugins/gcal-days/) | [Author Homepage](http://coffee2code.com)
 
 
 == Installation ==
 
-1. Unzip `gcal-days.zip` inside the `/wp-content/plugins/` directory for your site (or install via the built-in WordPress plugin installer)
-1. Activate the plugin through the 'Plugins' admin menu in WordPress
+1. Unzip `gcal-days.zip` inside the `/wp-content/plugins/` directory for your site (or install via the built-in WordPress plugin installer).
+1. Activate the plugin through the 'Plugins' admin menu in WordPress.
 1. Visit the plugin's setting page, 'Settings' -> 'GCal Days', and follow the link to obtain an authorization code from Google that permits the plugin access to your Google Calendar data.
-1. Use the provided shortcode or functions, as per instructions
+1. Use the provided shortcode or functions, as per instructions.
 
 
 == Frequently Asked Questions ==
@@ -100,6 +100,14 @@ if ( -1 == $days_since ) {
 
 == Changelog ==
 
+= 1.1.1 (2015-03-06) =
+* Declare `shortcode()` to be static
+* Add support for localization
+* Note compatibility through WP 4.1+
+* Change documentation links to wp.org to be https
+* Update copyright date (2015)
+* Add plugin icon
+
 = 1.1 =
 * Apply do_shortcode to widget_text so the shortcode works in text widgets
 * Add actual documentation for the shortcode
@@ -112,6 +120,9 @@ if ( -1 == $days_since ) {
 
 
 == Upgrade Notice ==
+
+= 1.1.1 =
+Trivial update: added support for localization; noted compatibility through WP 4.1+; added plugin icon
 
 = 1.1 =
 Recommended minor update: allow shortcode to work in text widgets; added documentation for shortcode.
